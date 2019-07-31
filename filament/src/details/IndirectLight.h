@@ -49,6 +49,15 @@ public:
     void setRotation(math::mat3f const& rotation) noexcept { mRotation = rotation; }
     const math::mat3f& getRotation() const noexcept { return mRotation; }
     size_t getMaxMipLevel() const noexcept { return mMaxMipLevel; }
+    math::float3 getDirectionEstimate() const noexcept {
+        math::float3 r = normalize(math::float3{
+                -mIrradianceCoefs[3].r, -mIrradianceCoefs[1].r, mIrradianceCoefs[2].r });
+        math::float3 g = normalize(math::float3{
+                -mIrradianceCoefs[3].g, -mIrradianceCoefs[1].g, mIrradianceCoefs[2].g });
+        math::float3 b = normalize(math::float3{
+                -mIrradianceCoefs[3].b, -mIrradianceCoefs[1].b, mIrradianceCoefs[2].b });
+        return r * 0.2126f + g * 0.7152f + b * 0.0722f;
+    }
 
 private:
     backend::Handle<backend::HwTexture> mReflectionsMapHandle;

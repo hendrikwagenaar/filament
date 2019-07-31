@@ -188,5 +188,9 @@ const math::mat3f& IndirectLight::getRotation() const noexcept {
     return upcast(this)->getRotation();
 }
 
+math::float3 IndirectLight::getDirectionEstimate() const noexcept {
+    return upcast(this)->getDirectionEstimate();
+}
+
 
 } // namespace filament
